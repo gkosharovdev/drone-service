@@ -16,3 +16,12 @@ Constraints:
 Technical:
 
 The service implementation is following the Hexagon architecture. It is also emitting domain events for each successful change of the state of the drone.
+
+Done:
+
+- Domain model
+- Application services
+
+TBD:
+
+- Infrastructure - controllers, messaging, configs, etc
