@@ -1,13 +1,18 @@
 package com.demo.drone.application;
 
+import com.demo.drone.infrastructure.http.DroneDto;
 import com.demo.drone.infrastructure.http.MoveRequest;
 import com.demo.drone.infrastructure.http.DeployDroneRequest;
 import com.demo.drone.infrastructure.http.TurnRequest;
 
+import java.util.Optional;
+
 public interface DroneApplicationService {
-    void turn(TurnRequest request);
+    Optional<DroneDto> turn(TurnRequest request);
 
-    void move(MoveRequest Request);
+    Optional<DroneDto> move(MoveRequest Request);
 
-    void deployDrone(DeployDroneRequest request);
+    DroneDto deployDrone(DeployDroneRequest request);
+
+    Optional<DroneDto> findByName(String name);
 }

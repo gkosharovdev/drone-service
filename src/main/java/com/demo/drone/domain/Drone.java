@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZonedDateTime;
 
-@Document(collation = "drones")
+@Document(collection = "drones")
 @Slf4j
 @Getter
 public class Drone extends AbstractAggregateRoot<Drone> {
@@ -122,7 +122,7 @@ public class Drone extends AbstractAggregateRoot<Drone> {
 
   private void assertPosition(Position position) {
     if (!this.currentFlyingArea.isPositionWithinArea(position)) {
-      throw new PositionOutOfFlyingAreaException();
+      throw new PositionOutOfFlyingAreaException(this.getName().getName());
     }
   }
 
