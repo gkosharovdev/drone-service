@@ -6,6 +6,7 @@ The service exposes a REST API to control the drone and inspect the current stat
 
 Available commands are:
 
+- Deploy drone
 - Turn left/right
 - Move forward
 
@@ -15,13 +16,4 @@ Constraints:
 
 Technical:
 
-The service implementation is following the Hexagon architecture. It is also emitting domain events for each successful change of the state of the drone.
-
-Done:
-
-- Domain model
-- Application services
-
-TBD:
-
-- Infrastructure - controllers, messaging, configs, etc
+The service implementation is following the Hexagon architecture. It is also emitting domain events for each successful change of the state of the drone. Following the 'events-first' mindset (although this is NOT an Eventsourcing solution) the Drone aggregate is applying the already instantiated domain events in order to advance to the next valid state resepcting the invariant rules. The aggregate keeps track of the published events by extedning Spring's AbstractAggregateRoot. This could be the base work for implementing the Transactional outbox (https://microservices.io/patterns/data/transactional-outbox.html) for reliable event publication.
