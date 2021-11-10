@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: drone-service
+  data:
+    mongodb:
+      uri: ${MONGO_DB_URI}
+      database: drone
+  cloud:
+    stream:
+      source: droneEventSupplier
+      bindings:
+        droneEventSupplier-out-0:
+          destination: demo.events.drone
+          producer:
+            partitionKeyExpression: payload.id
+            partitionCount: 2
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      security.protocol: ${SPRING_KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
+    consumer:
+      auto-offset-reset: latest
+      max-poll-records: 100
+      enable-auto-commit: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
